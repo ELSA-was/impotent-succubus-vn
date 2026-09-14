@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="《我养了一个阳痿阴湿魅魔》— 西幻魅魔恋爱题材多分支多结局成人向文字冒险游戏">
+<title>我养了一个阳痿阴湿魅魔 | Impotent Succubus VN</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>💜</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ═══════════ 18+ 年龄确认门 ═══════════ -->
+<div id="age-gate" class="screen active">
+  <div class="gate-card glass-panel">
+    <div class="gate-rose">🥀</div>
+    <h1 class="gate-title">我养了一个<span class="title-accent">阳痿阴湿</span>魅魔</h1>
+    <p class="gate-sub">Impotent Succubus — A Dark Romance Visual Novel</p>
+    <div class="gate-warning">
+      <p>⚠ 本作包含 <b>成人向内容（R18）</b>：明确的性描写、心理创伤叙事、支配型关系描写。</p>
+      <p>所有登场角色均为虚构成年人。未满 18 周岁请立即离开。</p>
+    </div>
+    <div class="gate-buttons">
+      <button id="btn-age-yes" class="btn-gold">我已满 18 周岁，进入</button>
+      <button id="btn-age-no" class="btn-dim">我未满 18，离开</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 标题画面 ═══════════ -->
+<div id="title-screen" class="screen">
+  <div class="title-bg"></div>
+  <div class="title-vignette"></div>
+  <div class="title-content">
+    <div class="title-ornament">✦ ❈ ✦</div>
+    <h1 class="game-title">我养了一个<span>阳痿阴湿</span>魅魔</h1>
+    <p class="game-subtitle">— 他在雨里等你捡 —</p>
+    <div class="title-chara"><img src="assets/char/sylas_base.webp" alt="赛拉斯"></div>
+    <nav class="title-menu">
+      <button id="btn-start" class="menu-btn">✦ 开始新的故事</button>
+      <button id="btn-continue" class="menu-btn">✦ 继续旅程</button>
+      <button id="btn-gallery" class="menu-btn">✦ 结局图鉴</button>
+      <button id="btn-cg" class="menu-btn" hidden></button>
+    </nav>
+    <p class="title-save-info" id="title-save-info"></p>
+  </div>
+</div>
+
+<!-- ═══════════ 主角命名 ═══════════ -->
+<div id="name-screen" class="screen">
+  <div class="gate-card glass-panel">
+    <h2 class="section-title">— 你的名字 —</h2>
+    <p class="name-hint">灰烬港的除祓师。人们叫你——</p>
+    <input id="player-name" class="name-input" type="text" maxlength="8" placeholder="薇拉" value="薇拉">
+    <div class="gate-buttons">
+      <button id="btn-name-ok" class="btn-gold">以此之名，打开那扇门</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 游戏主界面 ═══════════ -->
+<div id="game-screen" class="screen">
+
+  <!-- 背景层 -->
+  <div id="bg-layer" class="bg-layer"></div>
+  <div id="bg-prev" class="bg-layer bg-prev"></div>
+  <div class="bg-dim"></div>
+
+  <!-- 立绘层 -->
+  <div id="chara-layer"><img id="chara-img" src="" alt=""></div>
+
+  <!-- 顶部 HUD -->
+  <div id="hud" class="hud">
+    <div class="stat-bars">
+      <div class="stat" title="心核温度——他的欲望复苏程度"><span class="stat-ico">🔥</span><div class="bar core"><i id="bar-core"></i></div></div>
+      <div class="stat" title="他对你敞开多少"><span class="stat-ico">🕊</span><div class="bar trust"><i id="bar-trust"></i></div></div>
+      <div class="stat" title="被强迫与工具化的程度"><span class="stat-ico">⛓</span><div class="bar taint"><i id="bar-taint"></i></div></div>
+      <div class="stat" title="你的真心"><span class="stat-ico">💜</span><div class="bar bond"><i id="bar-bond"></i></div></div>
+    </div>
+    <div class="hud-btns">
+      <button id="btn-history" title="历史">📜</button>
+      <button id="btn-save" title="保存">💾</button>
+      <button id="btn-load" title="读取">📂</button>
+      <button id="btn-skip" title="快进（按住）">⏩</button>
+      <button id="btn-title" title="回到标题">🏠</button>
+    </div>
+  </div>
+
+  <!-- 章节标题卡 -->
+  <div id="chapter-card" class="chapter-card"><div class="ch-orn">❈</div><div id="chapter-text"></div><div class="ch-orn">❈</div></div>
+
+  <!-- 对话框 -->
+  <div id="dialog-box" class="dialog-box glass-panel">
+    <div class="dialog-avatar-frame"><img id="dialog-avatar" src="" alt=""></div>
+    <div class="dialog-main">
+      <div id="dialog-name" class="dialog-name"></div>
+      <div id="dialog-text" class="dialog-text"></div>
+      <div id="dialog-continue" class="dialog-continue">▼</div>
+    </div>
+  </div>
+
+  <!-- 选项 -->
+  <div id="choice-layer" class="choice-layer"></div>
+
+  <!-- 数值浮动提示 -->
+  <div id="float-hint" class="float-hint"></div>
+</div>
+
+<!-- ═══════════ 历史面板 ═══════════ -->
+<div id="history-panel" class="overlay-panel">
+  <div class="panel-head"><h3>📜 回忆之卷</h3><button class="btn-close" data-close="history-panel">✕</button></div>
+  <div id="history-list" class="panel-body"></div>
+</div>
+
+<!-- ═══════════ 结局图鉴 ═══════════ -->
+<div id="gallery-panel" class="overlay-panel">
+  <div class="panel-head"><h3>❈ 结局图鉴 <span id="gallery-count"></span></h3><button class="btn-close" data-close="gallery-panel">✕</button></div>
+  <div id="gallery-list" class="panel-body"></div>
+</div>
+
+<!-- ═══════════ R18 幕间屏障 ═══════════ -->
+<div id="r18-veil" class="screen">
+  <div class="gate-card glass-panel">
+    <div class="gate-rose">🕯</div>
+    <h2 class="section-title">— 接下来的章节，涉及明确的亲密描写 —</h2>
+    <p class="name-hint">蜡烛已熄。若你愿意，请亲手推开这扇门。</p>
+    <div class="gate-buttons">
+      <button id="btn-r18-ok" class="btn-gold">继续</button>
+    </div>
+  </div>
+</div>
+
+<!-- toast -->
+<div id="toast" class="toast"></div>
+
+<script src="js/story/prologue.js"></script>
+<script src="js/story/ch1.js"></script>
+<script src="js/story/ch2.js"></script>
+<script src="js/story/ch3.js"></script>
+<script src="js/story/ch4.js"></script>
+<script src="js/story/endings.js"></script>
+<script src="js/engine.js"></script>
+</body>
+</html>
